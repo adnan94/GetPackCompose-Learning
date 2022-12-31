@@ -1,6 +1,6 @@
 > Text
-> Image
-> Coloumns/Rows
-> RecyclerView
-> CardView
-> Button
+/n> Image
+/n> Coloumns/Rows
+/n> RecyclerView
+/n> CardView
+/n> Button
