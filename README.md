@@ -1,6 +1,6 @@
-> Text
-/n> Image
-/n> Coloumns/Rows
-/n> RecyclerView
-/n> CardView
-/n> Button
+> Text<br/>
+> Image<br/>
+> Coloumns/Rows<br/>
+> RecyclerView<br/>
+> CardView<br/>
+> Button<br/>
