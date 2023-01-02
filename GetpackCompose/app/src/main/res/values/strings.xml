@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">JetpackCompose</string>
     <string name="title_activity_layout_basics">LayoutBasics</string>
+    <string name="title_activity_todo_list">TodoList</string>
 </resources>

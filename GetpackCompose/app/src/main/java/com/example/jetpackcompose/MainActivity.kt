@@ -31,25 +31,49 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeTheme {
-                UserCard("Adnan Ahmed")
+                val context = LocalContext.current
+                Column() {
+                    Row(){
+                        Button(onClick = { /*TODO*/
+                            startActivity(
+                                context,
+                                Intent(context, TodoList::class.java),
+                                null
+                            )
+                        }, modifier = Modifier.padding(10.dp).fillMaxWidth()) {
+                            Text(text = "TodoList")
+                        }
+                    }
+                    Row(){
+                        UserCard("Adnan Ahmed")
+                    }
+
+
+
+                }
+            }
             }
         }
-    }
 }
 
 @Composable
-fun UserCard(userName:String) {
+fun UserCard(userName: String) {
     Surface(modifier = Modifier.fillMaxSize()) {
+        val context = LocalContext.current
 
-        Row(){
-            val context = LocalContext.current
-            Card(elevation = 4.dp ,
-                modifier = Modifier.padding(10.dp)) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
+        Row() {
+
+            Card(
+                elevation = 4.dp,
+                modifier = Modifier.padding(10.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
 //                .border(width = 1.dp, color = Color.Gray)
-                    .padding(12.dp)) {
+                        .padding(12.dp)
+                ) {
 
                     Image(
                         modifier = Modifier
@@ -57,7 +81,8 @@ fun UserCard(userName:String) {
                             .clip(CircleShape),
                         painter = painterResource(id = R.drawable.aaa),
                         contentDescription = "",
-                        contentScale = ContentScale.Crop)
+                        contentScale = ContentScale.Crop
+                    )
 
                     Column(verticalArrangement = Arrangement.Center) {
 
@@ -72,10 +97,13 @@ fun UserCard(userName:String) {
                                 }
                                 .padding(8.dp)
                         )
-
                         Button(onClick = { /*TODO*/
-                            startActivity(context,Intent(context,RecyclerViewActivity::class.java),null)
-                        }, modifier = Modifier.padding(10.dp,0.dp,0.dp,0.dp)) {
+                            startActivity(
+                                context,
+                                Intent(context, RecyclerViewActivity::class.java),
+                                null
+                            )
+                        }, modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)) {
                             Text(text = "RecyclerView")
                         }
                     }
@@ -83,9 +111,8 @@ fun UserCard(userName:String) {
 
             }
 
+
         }
-
-
     }
 }
 
