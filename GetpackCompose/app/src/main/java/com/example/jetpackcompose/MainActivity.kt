@@ -3,6 +3,9 @@ package com.example.jetpackcompose
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -24,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat.startActivity
 import com.example.jetpackcompose.ui.theme.JetpackComposeTheme
 
@@ -44,7 +48,22 @@ class MainActivity : ComponentActivity() {
             todoListButton(context)
             fragmentButton(context)
             fragmentButton2(context)
+            composeWithXml(context)
             UserCard("Adnan Ahmed")
+        }
+    }
+
+    @Composable
+    private fun composeWithXml(context: Context) {
+        Row {
+         AndroidView(factory = {
+             View.inflate(it,R.layout.image_layout,null)
+         }, update = {
+             val imageView = it.findViewById<ImageView>(R.id.iv)
+             imageView.setOnClickListener {
+                 Toast.makeText(context,"Clicked image",Toast.LENGTH_SHORT).show()
+             }
+         })
         }
     }
 
