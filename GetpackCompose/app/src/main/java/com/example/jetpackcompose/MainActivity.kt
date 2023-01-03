@@ -1,5 +1,6 @@
 package com.example.jetpackcompose
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -31,95 +32,147 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeTheme {
-                val context = LocalContext.current
-                Column() {
-                    Row(){
-                        Button(onClick = { /*TODO*/
-                            startActivity(
-                                context,
-                                Intent(context, TodoList::class.java),
-                                null
-                            )
-                        }, modifier = Modifier.padding(10.dp).fillMaxWidth()) {
-                            Text(text = "TodoList")
-                        }
-                    }
-                    Row(){
-                        UserCard("Adnan Ahmed")
-                    }
-
-
-
-                }
-            }
+                MainView()
             }
         }
+    }
+
+    @Composable
+    fun MainView() {
+        val context = LocalContext.current
+        Column() {
+            todoListButton(context)
+            fragmentButton(context)
+            fragmentButton2(context)
+            UserCard("Adnan Ahmed")
+        }
+    }
+
+    @Composable
+    private fun fragmentButton(context: Context) {
+        Row() {
+            Button(
+                onClick = { /*TODO*/
+                    val intent = Intent(context,FragmentsActivity::class.java)
+                    intent.putExtra("type","compose")
+                    startActivity(intent,
+                        null
+                    )
+                }, modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(text = "Compose Fragment")
+            }
+        }
+    }
+}
+
+
+@Composable
+private fun fragmentButton2(context: Context) {
+    Row() {
+        Button(
+            onClick = { /*TODO*/
+                val intent = Intent(context,FragmentsActivity::class.java)
+                intent.putExtra("type","xml")
+                startActivity(context,intent,
+                    null
+                )
+            }, modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth()
+        ) {
+            Text(text = "Compose Fragment With Xml")
+        }
+    }
+}
+
+
+@Composable
+private fun todoListButton(context: Context) {
+    Row() {
+        Button(
+            onClick = { /*TODO*/
+                startActivity(
+                    context,
+                    Intent(context, TodoList::class.java),
+                    null
+                )
+            }, modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth()
+        ) {
+            Text(text = "TodoList")
+        }
+    }
 }
 
 @Composable
 fun UserCard(userName: String) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        val context = LocalContext.current
+    Row() {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            val context = LocalContext.current
 
-        Row() {
+            Row() {
 
-            Card(
-                elevation = 4.dp,
-                modifier = Modifier.padding(10.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-//                .border(width = 1.dp, color = Color.Gray)
-                        .padding(12.dp)
+                Card(
+                    elevation = 4.dp,
+                    modifier = Modifier.padding(10.dp)
                 ) {
-
-                    Image(
+                    Row(
                         modifier = Modifier
-                            .size(80.dp)
-                            .clip(CircleShape),
-                        painter = painterResource(id = R.drawable.aaa),
-                        contentDescription = "",
-                        contentScale = ContentScale.Crop
-                    )
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+//                .border(width = 1.dp, color = Color.Gray)
+                            .padding(12.dp)
+                    ) {
 
-                    Column(verticalArrangement = Arrangement.Center) {
-
-                        Text(text = userName,
-                            color = colorResource(id = R.color.purple_500),
-                            fontSize = 20.sp,
+                        Image(
                             modifier = Modifier
-                                .clickable {
-                                    Toast
-                                        .makeText(context, "Clicked", Toast.LENGTH_SHORT)
-                                        .show()
-                                }
-                                .padding(8.dp)
+                                .size(80.dp)
+                                .clip(CircleShape),
+                            painter = painterResource(id = R.drawable.aaa),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop
                         )
-                        Button(onClick = { /*TODO*/
-                            startActivity(
-                                context,
-                                Intent(context, RecyclerViewActivity::class.java),
-                                null
+
+                        Column(verticalArrangement = Arrangement.Center) {
+
+                            Text(text = userName,
+                                color = colorResource(id = R.color.purple_500),
+                                fontSize = 20.sp,
+                                modifier = Modifier
+                                    .clickable {
+                                        Toast
+                                            .makeText(context, "Clicked", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                    .padding(8.dp)
                             )
-                        }, modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)) {
-                            Text(text = "RecyclerView")
+                            Button(onClick = { /*TODO*/
+                                startActivity(
+                                    context,
+                                    Intent(context, RecyclerViewActivity::class.java),
+                                    null
+                                )
+                            }, modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)) {
+                                Text(text = "RecyclerView")
+                            }
                         }
                     }
+
                 }
 
             }
-
-
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JetpackComposeTheme {
-        UserCard("Zeeshan Ali")
     }
 }
