@@ -4,18 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.navigation.ui.theme.NavigationTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,33 +33,33 @@ class MainActivity : ComponentActivity() {
                         composable("home") {
                             Home(navController)
                         }
-                        composable("office") {
-                            Office(navController)
+
+//                        composable("office?item={itemValue}", arguments =
+//                        listOf(
+//                            navArgument("itemValue"){
+//                                type = NavType.StringType
+//                                defaultValue = "Item not available"
+//                                nullable = true
+//                            })
+//                        ) {
+//                        val item = it.arguments?.getString("itemValue")
+//                        Office(navController,item)
+//                    }
+
+//                        or
+
+                        composable("office/{item}/{item2}") {
+                            val item = it.arguments?.getString("item")
+                            val item2 = it.arguments?.getString("item2")
+                            Office(navController,"$item $item2")
                         }
+
                     }
 
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Row(horizontalArrangement = Arrangement.Center) {
-                            NavigationButton(navController)
-                        }
-                    }
+
                 }
             }
         }
     }
 }
 
-@Composable
-fun NavigationButton(navController: NavHostController) {
-
-    Button(modifier = Modifier
-        .padding(10.dp)
-        .height(40.dp), onClick = {
-        navController.navigate("office")
-    }) {
-        Text(text = "Navigation")
-    }
-}
