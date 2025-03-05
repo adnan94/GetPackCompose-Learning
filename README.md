@@ -1,12 +1,15 @@
--> Text<br/>
--> Image<br/>
 -> Coloumns/Rows<br/>
 -> RecyclerView<br/>
 -> CardView<br/>
--> Button<br/>
--> Box<br/>
 -> State<br/>
 -> Fragments Composable Ui<br/>
 -> Compose with xml file<br/>
 -> Navigation From A to B with arguments<br/>
 -> Bottom navigation bar<br/>
+-> Todo List App<br/>  
+-> Login Screen Design , Switch , TextView , EditText , Button , ImageView , List , Check Box , Box , Row , Column Modifiers , topBar.<br/>
+-> TabLayout<br/>
+-> Bottom Navigation<br/>
+-> Lazy grid with click<br/>
+-> Navigation drawer<br/>
+-> Drop down menu
